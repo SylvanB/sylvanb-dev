@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel><title>cobalt blog</title><link>http://localhost:3000</link><description>Blog Posts Go Here</description><item><title>First Post</title><link>http://localhost:3000/posts/2020-04-05-post-1.html</link><description><![CDATA[<h1>My first ever post!</h1>
+]]></description><guid>http://localhost:3000/posts/2020-04-05-post-1.html</guid><pubDate>Sun, 05 Apr 2020 23:00:14 +0000</pubDate></item></channel></rss>

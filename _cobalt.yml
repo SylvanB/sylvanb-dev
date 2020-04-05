@@ -1,0 +1,7 @@
+
+site:
+  title: Sylvan B - My Corner of the Internet
+  description: My musings and mind-dump.
+  base_url: http://sylvanb.dev
+posts:
+  rss: rss.xml
