@@ -1,0 +1,44 @@
+main {
+  max-width: 38rem; 
+  margin: auto;
+}
+
+html {
+  background-color: black;
+  color: cornsilk;
+  font-family: 'Cardo', serif;
+}
+
+a {
+  font-family: 'Cardo', serif;
+  color: #d48428;
+  text-decoration: none;
+}
+
+p {
+  text-align: justify;
+}
+
+.title:hover {
+  color: #d4bd28;
+}
+
+.nav-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-item {
+  list-style-type: none;
+  margin: 0 1em;
+  padding: 0.1em;
+}
+
+
+.footer {
+  font-size: 0.8rem;
+  text-align: center;
+}
