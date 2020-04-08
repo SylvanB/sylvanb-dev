@@ -1,4 +1,4 @@
-main {
+body {
   max-width: 45rem; 
   margin: auto;
 }
@@ -7,7 +7,7 @@ html {
   background-color: black;
   color: cornsilk;
   font-family: 'Cardo', serif;
-  font-size: 1.1rem;
+  font-size: 1rem;
 }
 
 a {
@@ -59,8 +59,45 @@ td, th {
   padding: 0.1em;
 }
 
+.nav-item > a:hover {
+  color: #d4bd28;
+}
 
 .footer {
   font-size: 0.8rem;
   text-align: center;
+}
+
+.article-image-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.article-image-container > img {
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+
+}
+
+.label {
+  text-align: center;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  font-style: italic;
+}
+
+.main-container {
+  display: grid
+}
+
+.man-content {
+  grid-column-start: 1;
+}
+
+.sidebar {
+  grid-column-start: 2;
+  width: 10rem;
 }

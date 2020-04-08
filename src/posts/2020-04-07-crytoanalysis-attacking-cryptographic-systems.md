@@ -23,7 +23,12 @@ There are three main types of ciphers used in modern cryptographic systems. Firs
 ### 2.1 Block Ciphers (AES)
 A block cipher is commonly used across many modern encryption implementations such as AES/DES. It takes a fixed-length block of bytes and outputs the encrypted bytes. The encrypted bytes are determined by the key by using a process called ‘keyed permutation’. Every possible plaintext block input is mapped to another input to generate a set of outputs for any given inputs. This works as an encryption algorithm, as given any pair of input plaintext and output cipher cannot be determined without the presence of the key.
 
-![Simple Encryption Cipher Flowchart](../encryption.png)
+<div class="article-image-container">
+    <img src="../encryption.png"/>
+    <p class="label">
+        A single encryption block when given a plaintext and key outputs the associated ciphertext. The decryption block when given the generated ciphertext and the same key generates the same plaintext.  (Crypto101, 2019, p. 31)
+    </p>
+</div>
 
 The above figure shows that a single encryption block when given a plaintext and key outputs the associated ciphertext. And that the decryption block when given the generated ciphertext and the same key generates the same plaintext.  (Crypto101, 2019, p. 31)
 
@@ -34,8 +39,9 @@ The above figure shows that a single encryption block when given a plaintext and
 | 10          | 00             |
 | 11          | 10             |
 
-The above table also demonstrates an example of the mapping between a block input to the related output - using within keyed permutation. 
-
+<p class="label">
+    The above table demonstrates an example of the mapping between a block input to the related output - used within keyed permutation. 
+</p>
 AES (Advanced Encryption Standard) is among the most popular implementation of a block cipher encryption algorithm, announced in 2001 by NIST (National Institute of Standards and Technology) *(Dworkin et al, 2001)* and went on to be used by the US government and the National Security agency, as shown from the following excerpt from a CNSS (Committee on National Security Systems) Policy.
 
 > *“The design and strength of all key lengths of the AES algorithm (i.e., 128, 192 and 256) are sufficient to protect classified information up to the SECRET level.  TOP SECRET information will require [the] use of either the 192 or 256 lengths.  The implementation of AES in products intended to protect national security systems and/or information must  reviewed and certified by NSA prior to their acquisition and use.” (CNSS, 2003)*
@@ -48,20 +54,26 @@ A second family of ciphers is the stream cipher. Stream ciphers utilise a block 
 
 ![Cipher Block Chaining](../cipher-block-chaining.png)
 
-*The previous figure shows an example of how encryption blocks can be chained to generate a ciphertext (Crypto101, 2019, p. 54).*
+<p class="label">
+    Encryption blocks can be chained to generate a ciphertext (Crypto101, 2019, p. 54).
+</p>
 
 A modern stream cipher is Salsa20 and the closely related ChaCha cipher, both created by Daniel Bernstein. It revolves around a quarter round function (see following image) applied to the state matrix created from a 64-byte block, repeated for a given amount of rounds - by default most implementations use 20 rounds. Bernstein claims that *“Salsa20 is consistently faster than AES"* and that *“the community seems to have rapidly gained confidence in the security of the cipher” (Bernstein, 2011)*. The security of the cipher as also been enforced by a proof that demonstrated that a differential cryptanalysis of Salsa20 with 15 rounds is less practical than a full 128-bit key brute-force (Mouha and Preneel, 2013).
 
 ![Quarter Round Function Example](../quarter-round-function.png)
 
-*An example quarter round function used within Salsa20 - using a mixture of addition, rotation and XOR operations. (Wikipedia, 2018)*
+<p class="label">
+    An example quarter round function used within Salsa20 - using a mixture of addition, rotation and XOR operations. (Wikipedia, 2018)
+</p>
 
 ### 2.3 Public Key Encryption
 Public key encryption, also known as asymmetric encryption, is built around the requirement that one party wants to be able to receive messages from other parties that can only be read by themselves. This has substantial advantages over symmetric encryption when there is a requirement of communications over insecure or untrusted mediums, as it does not require the exchange of a secret key over possibly insecure mediums.
 
 ![Asymmetric Encryption](../asymmetric-encryption.png)
 
-*Structure of Public Key Encryption - note that the encryption and decryption function use different keys.*
+<p class="label">
+    Structure of Public Key Encryption - note that the encryption and decryption function use different keys.
+</p>
 
 The most popular asymmetric encryption algorithm is the RSA system, named after Ron Rivest, Adi Shamir, and Leonard Adleman who designed the algorithm in 1977 *(Rivest, Shamir and Adleman, 1977)*, which is built around the difficulty of factoring two large prime numbers. RSA has become one of the leading public key encryption algorithms, commonly used within OpenSSL to provide a method of secure key exchange.
 
@@ -70,7 +82,9 @@ While not a type of encryption cipher, hashing algorithms play an important part
 
 ![cryptographic-hashing](../cryptographic-hashing.png)
 
-*Two different plaintexts - two different hashes. The basis of hashing functions.*
+<p class="label">
+    Two different plaintexts - two different hashes. The basis of hashing functions.
+</p>
 
 As such, given two plaintexts with only 1 bit difference between them, a hashing function would produce a unique output for each value. This is invaluable when wanting to verify a given password without the requirement of storing a users password in a system in plaintext. The weakness within hashing algorithms is that once a collision (two inputs that produce the same output) has been found, the integrity of the algorithm is heavily reduced, as shown recently by the discovery of a new collision in SHA-1 *(Leurent and Peyrin, 2020)* further degrading SHA-1’s suitability as a trustworthy hashing algorithm.
 
@@ -90,8 +104,9 @@ Given a cryptographic system, there is always the possibility of an attacker bru
 Known plaintext attacks assume that the attacker has access to pairs of plaintext and their associated ciphertexts. Using this information the attacker is able to determine the relationships between the pairs to determine the key used to encrypt a given pair. A simple example of a known plaintext attack would be a simple XOR encryption algorithm. Given that an attacker knows the pairs they would be able to easily derive the key shown by the process in the following image. This was an attack method used during World War 2, where analysts had access to ciphertexts generated from the Enigma machine, alongside captured or stolen ‘cribs’ - plaintext messages *(Carter, n.d)*.
 
 ![Xor Known Plaintext Example](../xor-known-plaintext.png)
-
-*Example of a basic known plaintext attack, involving the unknown key, K, within a basic XOR encryption.*
+<p class="label">
+    Example of a basic known plaintext attack, involving the unknown key, K, within a basic XOR encryption.
+</p>
 
 ### 3.3 Side-Channel Attacks 
 While side-channel attacks target the implementation of cryptographic systems instead of the cryptographic system themselves, they are becoming more widely seen, with the most noteworthy recently being that of the Meltdown and Spectre attacks on modern CPU platforms which caused not only secrets to be leaked but, in the case of Meltdown, would allow *“an adversary to read memory of other processes or virtual machines in the cloud without any permissions or privileges” (Lipp, et al,  2018, p1)* by exploiting the architecture of the CPU’s and their use of Out-of-Order Execution. This is significant, as instead of traditional cryptanalysis that analyses the cryptographic algorithms, it has pivoted the attack to the implementation, to find oversights in hardware or software that allow an attacker to extract secrets from a theoretically secure system.
