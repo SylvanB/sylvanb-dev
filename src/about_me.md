@@ -11,4 +11,4 @@ My name is Sylvan Bowdler, I am an application developer at PebblePad who mainly
 
 ## Where to find me?
 You can find me on the following social media sites:
-- [Twitter](https://twitter.com/GoldenSoulOne1)
+- [Twitter](https://twitter.com/goldsoulsylvan)

@@ -1,19 +1,30 @@
+:root {
+  --dark-main-bg-colour: brown;
+  --dark-main-text-colour: cornsilk;
+  --dark-link-colour: #d48428;
+
+  --light-main-bg-colour: white;
+  --light-main-text-colour: black;
+  --light-link-colour: #a15b0a;
+
+}
+
 body {
-  max-width: 45rem; 
+  max-width: 60rem;
   margin: auto;
   padding: 10px;
 }
 
 html {
-  background-color: black;
-  color: cornsilk;
+  background-color: var(--light-main-bg-colour);
+  color: var(--light-main-text-colour);
   font-family: 'Cardo', serif;
   font-size: 1rem;
 }
 
 a {
   font-family: 'Cardo', serif;
-  color: #d48428;
+  color: var(--light-link-colour);
   text-decoration: none;
 }
 

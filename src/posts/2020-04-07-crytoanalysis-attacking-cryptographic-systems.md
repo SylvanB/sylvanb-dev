@@ -2,23 +2,22 @@
 title: "Cryptography and Cryptanalyis: Attacking Cryptographic Systems"
 published_date: "2020-04-07 21:31:10 +0000"
 layout: default.liquid
-is_draft: false
+is_draft: true
 ---
-{% assign pubDateSplit = page.published_date | split: " " %}
-{% assign pubDate = pubDateSplit[0] %}
+
 <!-- 
 DONT FORGET ABOUT HTML IN MARKDOWN YOU DOOF
 -->
 
 # Cryptography and Cryptanalyis: Attacking Cryptographic Systems
 
-**Sylvan Bowdler** - Published: **{{ pubDate }}**
+**Sylvan Bowdler** - Published: **{{ post.published_date | date: "%D" }}**
 
 ## 1.0 Introduction 
 The recent discovery of another vulnerability in the SHA-1 hashing algorithm being discovered recently *(Leurent and Peyrin, 2020)*, impacting on technologies such as PGP/GnuPG and X.509 certificates and by association impacting common technologies used within the modern internet to provide secure communications such as SSH and TLS, highlights the effects of cryptanalysis in modern software development. This report aims to cover the types of vulnerabilities in modern cryptographic systems by giving examples of modern encryption ciphers, common attacks used against modern ciphers, and how these attacks are impacting modern information systems.
 
 ## 2.0 Cryptography in Modern Software Development
-There are three main types of ciphers used in modern cryptographic systems. First being the symmetric ciphers - block and stream ciphers - which depend on a single secret key. Second being the asymmetric ciphers which depend on a public and private key. This section will discuss the structure of these ciphers and modern implementations of these ciphers. 
+There are three main types of ciphers used in modern cryptographic systems. First being the symmetric ciphers - block and stream ciphers - which depend on a single secret key. Second being the asymmetric ciphers which depend on a public and private key. This section will discuss the structure of these ciphers and modern implementations of these ciphers.
 
 ### 2.1 Block Ciphers (AES)
 A block cipher is commonly used across many modern encryption implementations such as AES/DES. It takes a fixed-length block of bytes and outputs the encrypted bytes. The encrypted bytes are determined by the key by using a process called ‘keyed permutation’. Every possible plaintext block input is mapped to another input to generate a set of outputs for any given inputs. This works as an encryption algorithm, as given any pair of input plaintext and output cipher cannot be determined without the presence of the key.
@@ -50,9 +49,9 @@ The adoption of AES by these major government agencies to handle their critical 
 
 ### 2.2 Stream Ciphers (Salsa20/ChaCha) 
 <!-- Elaborate on some of these terms at some point? -->
-A second family of ciphers is the stream cipher. Stream ciphers utilise a block cipher in a specific  ‘Mode of Operation’ (MoO) called ‘Cipher Block Chaining’ (CBC) which removes a possible attack vector in the ‘Electronic Cook Book’ (ECB) MoO in which an attacker would be able to determine a secret suffix value using an oracle attack (Crypto101, 2019 p. 50-53). As shown by the below diagram, the CBC mode requires an additional initialisation vector (IV) in order to operate, this value must be generated from a cryptographically secure random source, but has no secrecy requirement. 
+A second family of ciphers is the stream cipher. Stream ciphers utilise a block cipher in a specific  ‘Mode of Operation’ (MoO) called ‘Cipher Block Chaining’ (CBC) which removes a possible attack vector in the ‘Electronic Cook Book’ (ECB) MoO in which an attacker would be able to determine a secret suffix value using an oracle attack (Crypto101, 2019 p. 50-53). As shown by the below diagram, the CBC mode requires an additional initialisation vector (IV) in order to operate, this value must be generated from a cryptographically secure random source, but has no secrecy requirement.
 
-![Cipher Block Chaining](../cipher-block-chaining.png)
+![Cipher Block Chaining](../images/cryptanalysis/cipher-block-chaining.png)
 
 <p class="label">
     Encryption blocks can be chained to generate a ciphertext (Crypto101, 2019, p. 54).
@@ -60,7 +59,7 @@ A second family of ciphers is the stream cipher. Stream ciphers utilise a block 
 
 A modern stream cipher is Salsa20 and the closely related ChaCha cipher, both created by Daniel Bernstein. It revolves around a quarter round function (see following image) applied to the state matrix created from a 64-byte block, repeated for a given amount of rounds - by default most implementations use 20 rounds. Bernstein claims that *“Salsa20 is consistently faster than AES"* and that *“the community seems to have rapidly gained confidence in the security of the cipher” (Bernstein, 2011)*. The security of the cipher as also been enforced by a proof that demonstrated that a differential cryptanalysis of Salsa20 with 15 rounds is less practical than a full 128-bit key brute-force (Mouha and Preneel, 2013).
 
-![Quarter Round Function Example](../quarter-round-function.png)
+![Quarter Round Function Example](../images/cryptanalysis/quarter-round-function.png)
 
 <p class="label">
     An example quarter round function used within Salsa20 - using a mixture of addition, rotation and XOR operations. (Wikipedia, 2018)
@@ -69,7 +68,7 @@ A modern stream cipher is Salsa20 and the closely related ChaCha cipher, both cr
 ### 2.3 Public Key Encryption
 Public key encryption, also known as asymmetric encryption, is built around the requirement that one party wants to be able to receive messages from other parties that can only be read by themselves. This has substantial advantages over symmetric encryption when there is a requirement of communications over insecure or untrusted mediums, as it does not require the exchange of a secret key over possibly insecure mediums.
 
-![Asymmetric Encryption](../asymmetric-encryption.png)
+![Asymmetric Encryption](../images/cryptanalysis/asymmetric-encryption.png)
 
 <p class="label">
     Structure of Public Key Encryption - note that the encryption and decryption function use different keys.
@@ -80,7 +79,7 @@ The most popular asymmetric encryption algorithm is the RSA system, named after 
 ### 2.4 Cryptographic Hashing
 While not a type of encryption cipher, hashing algorithms play an important part in modern software development alongside encryption ciphers, being the main secure method of verifying the contents of data - such as user passwords. Cryptographic hashing algorithms take a given input and produce a one-to-one mapping to an output value. 
 
-![cryptographic-hashing](../cryptographic-hashing.png)
+![cryptographic-hashing](../images/cryptanalysis/cryptographic-hashing.png)
 
 <p class="label">
     Two different plaintexts - two different hashes. The basis of hashing functions.
@@ -103,7 +102,7 @@ Given a cryptographic system, there is always the possibility of an attacker bru
 ### 3.2 Known Plaintext Attacks
 Known plaintext attacks assume that the attacker has access to pairs of plaintext and their associated ciphertexts. Using this information the attacker is able to determine the relationships between the pairs to determine the key used to encrypt a given pair. A simple example of a known plaintext attack would be a simple XOR encryption algorithm. Given that an attacker knows the pairs they would be able to easily derive the key shown by the process in the following image. This was an attack method used during World War 2, where analysts had access to ciphertexts generated from the Enigma machine, alongside captured or stolen ‘cribs’ - plaintext messages *(Carter, n.d)*.
 
-![Xor Known Plaintext Example](../xor-known-plaintext.png)
+![Xor Known Plaintext Example](../images/cryptanalysis/xor-known-plaintext.png)
 <p class="label">
     Example of a basic known plaintext attack, involving the unknown key, K, within a basic XOR encryption.
 </p>
